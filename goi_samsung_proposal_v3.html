@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고이 x 삼성카드 전략적 제휴 제안</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --samsung-blue: #1428a0;
+            --samsung-blue-dark: #0a1554;
+            --samsung-blue-light: #e8ecfc;
+            --accent: #ffc107;
+            --text: #1a1a1a;
+            --text-muted: #666;
+            --border: #e9ecef;
+            --bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #f0f2f8;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+            margin-bottom: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 40px;
+            right: 80px;
+            color: #ccc;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .logo-bar {
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .logo-bar .brand { font-size: 15px; font-weight: 700; color: #333; }
+        .logo-bar .sep { color: #ccc; font-size: 18px; }
+
+        h1 { font-size: 52px; font-weight: 900; line-height: 1.15; color: var(--text); margin-bottom: 24px; letter-spacing: -1px; }
+        h2 { font-size: 38px; font-weight: 800; margin-bottom: 44px; color: var(--text); letter-spacing: -0.5px; }
+        h3 { font-size: 22px; font-weight: 700; margin-bottom: 20px; color: #222; }
+        h4 { font-size: 16px; font-weight: 700; color: #333; }
+
+        .blue { color: var(--samsung-blue); }
+        .subtitle { font-size: 22px; color: var(--text-muted); margin-bottom: 60px; font-weight: 300; }
+
+        .section-label {
+            display: inline-block;
+            background: var(--samsung-blue);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
+
+        .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+        .stat-box {
+            background: var(--samsung-blue);
+            color: white;
+            padding: 44px 36px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .stat-box .num { font-size: 52px; font-weight: 900; line-height: 1; margin-bottom: 12px; letter-spacing: -1px; }
+        .stat-box .lbl { font-size: 16px; opacity: 0.85; font-weight: 400; line-height: 1.4; }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 32px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px; }
+
+        .card {
+            background: var(--bg);
+            padding: 36px;
+            border-radius: 16px;
+            border: 1.5px solid transparent;
+            transition: all 0.25s ease;
+        }
+        .card:hover { border-color: var(--samsung-blue); background: white; box-shadow: 0 8px 32px rgba(20,40,160,0.08); }
+
+        .callout {
+            background: #fffbeb;
+            border-left: 5px solid var(--accent);
+            padding: 24px 32px;
+            border-radius: 0 12px 12px 0;
+            margin: 28px 0;
+        }
+        .callout p { color: #444; }
+        .callout strong { color: var(--text); }
+
+        .blist { list-style: none; margin-top: 16px; }
+        .blist li {
+            padding: 10px 0 10px 28px;
+            position: relative;
+            color: var(--text-muted);
+            font-size: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .blist li:last-child { border-bottom: none; }
+        .blist li::before {
+            content: "✓";
+            position: absolute; left: 0;
+            color: var(--samsung-blue);
+            font-weight: 700;
+        }
+
+        .flow { display: flex; align-items: center; gap: 16px; margin: 32px 0; }
+        .flow-box {
+            flex: 1; background: var(--bg);
+            padding: 28px 20px; border-radius: 12px; text-align: center;
+            font-size: 15px;
+        }
+        .flow-box.active { background: var(--samsung-blue-light); border: 2px solid var(--samsung-blue); }
+        .flow-box strong { display: block; font-size: 16px; margin-bottom: 6px; }
+        .flow-arrow { color: var(--samsung-blue); font-size: 28px; font-weight: 900; flex-shrink: 0; }
+
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border);
+            color: #555;
+        }
+        .data-table th:not(:first-child) { text-align: right; }
+        .data-table td { padding: 16px 20px; border-bottom: 1px solid var(--border); font-size: 15px; }
+        .data-table td:not(:first-child) { text-align: right; }
+        .data-table tr.total {
+            background: var(--samsung-blue);
+            color: white;
+            font-weight: 700;
+            font-size: 17px;
+        }
+        .data-table tr.total td { border: none; }
+        .table-wrap { background: var(--bg); border-radius: 16px; padding: 8px; overflow: hidden; }
+
+        .timeline { display: flex; justify-content: space-between; margin: 48px 0; position: relative; }
+        .timeline::before {
+            content: ""; position: absolute; top: 20px; left: 0; right: 0;
+            height: 2px; background: var(--border);
+        }
+        .timeline-item { text-align: center; flex: 1; position: relative; }
+        .tl-dot {
+            width: 42px; height: 42px; background: var(--samsung-blue); border-radius: 50%;
+            margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 800; font-size: 18px; position: relative; z-index: 1;
+        }
+        .timeline-item h4 { margin-bottom: 4px; }
+        .timeline-item .period { font-size: 13px; color: var(--samsung-blue); font-weight: 600; margin-bottom: 10px; }
+        .timeline-item p { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+        .big-num-sm { font-size: 48px; font-weight: 900; color: var(--samsung-blue); line-height: 1; letter-spacing: -1px; }
+
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 60%);
+            z-index: 0;
+        }
+        .hero-content { position: relative; z-index: 1; }
+
+        .slide-dark {
+            background: linear-gradient(135deg, var(--samsung-blue) 0%, var(--samsung-blue-dark) 100%);
+            color: white;
+        }
+        .slide-dark h2, .slide-dark h3, .slide-dark h4 { color: white; }
+        .slide-dark .section-label { background: rgba(255,255,255,0.2); }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+
+        .cta-bar {
+            background: var(--samsung-blue);
+            color: white;
+            padding: 28px 40px;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 40px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 60px; padding-top: 32px;
+            border-top: 1px solid var(--border);
+            color: #aaa; font-size: 13px; line-height: 2;
+        }
+
+        .mt-lg { margin-top: 56px; }
+        .mt-md { margin-top: 36px; }
+
+        /* 멤버십 혜택 카드 */
+        .benefit-hero {
+            background: linear-gradient(135deg, var(--samsung-blue) 0%, var(--samsung-blue-dark) 100%);
+            border-radius: 24px;
+            padding: 56px;
+            color: white;
+            text-align: center;
+            margin: 32px 0;
+        }
+        .benefit-hero .amount {
+            font-size: 80px;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -3px;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+        .benefit-hero .desc {
+            font-size: 22px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        @media (max-width: 768px) {
+            .slide { padding: 40px; }
+            h1 { font-size: 32px; }
+            h2 { font-size: 26px; }
+            .stat-row, .grid-2, .grid-3, .two-col { grid-template-columns: 1fr; }
+            .flow { flex-direction: column; }
+            .timeline { flex-direction: column; gap: 32px; }
+            .timeline::before { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== SLIDE 1: TITLE ===== -->
+<div class="slide">
+    <div class="hero-bg"></div>
+    <div class="logo-bar">
+        <span class="brand">고이장례연구소</span>
+        <span class="sep">×</span>
+        <span class="brand">삼성카드</span>
+    </div>
+    <div class="slide-number">01</div>
+    <div class="hero-content" style="padding-top: 60px;">
+        <p class="section-label">전략적 제휴 제안</p>
+        <h1>연 <span class="blue">7조원</span><br>장례 시장을<br>카드로 전환합니다</h1>
+        <p class="subtitle">고이 × 삼성카드 제휴<br>장례 금융의 새로운 표준</p>
+        <div style="margin-top: 40px; color: #999; font-size: 15px;">
+            <p>2025년 5월</p>
+        </div>
+    </div>
+</div>
+
+<!-- ===== SLIDE 2: MARKET ===== -->
+<div class="slide">
+    <div class="logo-bar"><span class="brand">고이장례연구소</span><span class="sep">×</span><span class="brand">삼성카드</span></div>
+    <div class="slide-number">02</div>
+
+    <p class="section-label">시장 기회</p>
+    <h2>장례 시장,<br>카드가 아직 닿지 않은 곳</h2>
+
+    <div class="stat-row">
+        <div class="stat-box">
+            <div class="num">7조원</div>
+            <div class="lbl">연간 장례 시장 규모<br><span style="font-size:13px; opacity:0.7;">사망자 35만명 × 평균 2,000만원</span></div>
+        </div>
+        <div class="stat-box">
+            <div class="num">35만건</div>
+            <div class="lbl">연간 장례 발생 건수<br><span style="font-size:13px; opacity:0.7;">초고령사회 진입으로 지속 증가</span></div>
+        </div>
+        <div class="stat-box">
+            <div class="num">50%+</div>
+            <div class="lbl">현금·계좌이체 결제 비중<br><span style="font-size:13px; opacity:0.7;">카드 전환 여지 충분</span></div>
+        </div>
+    </div>
+
+    <div class="grid-2">
+        <div class="card">
+            <h4>😢 고객 입장</h4>
+            <ul class="blist">
+                <li>급작스러운 상황에서 준비 없이 지출</li>
+                <li>평균 2,000만원 일시 지출 부담</li>
+                <li>한도 부족, 대출 필요한 경우 다수</li>
+                <li>혜택 없는 일반 카드 사용</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>🏢 공급자 입장</h4>
+            <ul class="blist">
+                <li>영세 업체 중심, 카드 단말기 없음</li>
+                <li>수수료 부담으로 현금 선호</li>
+                <li>즉시 현금 필요 (정산 지연 기피)</li>
+                <li>디지털화 인프라 부재</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="callout">
+        <h4 style="margin-bottom: 8px;">💡 결혼카드가 증명한 모델을 장례에 적용합니다</h4>
+        <p>결혼: 평균 2억 지출, 전용카드 출시로 시장 장악 &nbsp;|&nbsp; 장례: 평균 2,000만원 지출, <strong>장례 전용 카드는 아직 없음</strong></p>
+        <p style="margin-top: 8px; font-size: 14px; color: #888;">※ 상조 PLCC는 일부 존재하나 장례 현장 결제에 특화된 전용 상품은 전무</p>
+    </div>
+</div>
+
+<!-- ===== SLIDE 3: GOI STATUS ===== -->
+<div class="slide">
+    <div class="logo-bar"><span class="brand">고이장례연구소</span><span class="sep">×</span><span class="brand">삼성카드</span></div>
+    <div class="slide-number">03</div>
+
+    <p class="section-label">파트너 소개</p>
+    <h2>고이, 유일한<br>디지털 장례 플랫폼</h2>
+
+    <div class="stat-row">
+        <div class="stat-box">
+            <div class="num">10만+</div>
+            <div class="lbl">정기 구좌 달성</div>
+        </div>
+        <div class="stat-box">
+            <div class="num">119억</div>
+            <div class="lbl">누적 투자 유치<br><span style="font-size:13px; opacity:0.7;">Series A 포함 (2025)</span></div>
+        </div>
+        <div class="stat-box">
+            <div class="num">4,000건</div>
+            <div class="lbl">연간 장례 진행 (2026)</div>
+        </div>
+    </div>
+
+    <div class="grid-3">
+        <div class="card">
+            <h4>📱 플랫폼</h4>
+            <ul class="blist">
+                <li>100% 카드 자동결제</li>
+                <li>월 100원 ~ 9,900원</li>
+                <li>20~50대 전 연령층</li>
+                <li>모바일 부고 서비스 1위</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>🔗 제휴 인프라</h4>
+            <ul class="blist">
+                <li>전국 장례식장 1,000개소</li>
+                <li>장지 1,000개소</li>
+                <li>연관 장례용품 업체</li>
+                <li>100% 디지털 운영</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>📊 데이터 자산</h4>
+            <ul class="blist">
+                <li>생애주기 빅데이터</li>
+                <li>가족 관계 정보</li>
+                <li>소비 패턴 분석</li>
+                <li>AI 예측 모델</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="callout">
+        <h4 style="margin-bottom: 8px;">🔗 삼성카드와의 시너지 포인트</h4>
+        <p><strong>고이</strong>: 장례 현장 접점 + 10만+ 구좌 + 전국 2,000개소 인프라 &nbsp;|&nbsp; <strong>삼성카드</strong>: 40~50대 주력 고객 + 결제 인프라 + 브랜드 신뢰도</p>
+    </div>
+</div>
+
+<!-- ===== SLIDE 4: PROPOSAL OVERVIEW ===== -->
+<div class="slide slide-dark">
+    <div class="logo-bar"><span class="brand" style="color:rgba(255,255,255,0.7)">고이장례연구소</span><span class="sep" style="color:rgba(255,255,255,0.3)">×</span><span class="brand" style="color:rgba(255,255,255,0.7)">삼성카드</span></div>
+    <div class="slide-number" style="color:rgba(255,255,255,0.3)">04</div>
+
+    <p class="section-label">제안 구조</p>
+    <h2 style="color:white;">두 가지 트랙으로<br>접근합니다</h2>
+
+    <div class="grid-2" style="margin-top: 20px;">
+        <div style="background: rgba(255,255,255,0.1); padding: 44px; border-radius: 20px; border: 1.5px solid rgba(255,255,255,0.2);">
+            <div style="font-size: 40px; font-weight: 900; color: var(--accent); margin-bottom: 16px;">TRACK 1</div>
+            <h3 style="color:white; font-size: 26px; margin-bottom: 16px;">고이 × 삼성카드 PLCC</h3>
+            <p style="color: rgba(255,255,255,0.75); font-size: 16px; line-height: 1.8;">
+                장례 전용 삼성카드 발급<br>
+                장례 발생 시 대규모 결제 포착<br>
+                <strong style="color: var(--accent);">TAM 3,600억+ (3년 누적)</strong>
+            </p>
+        </div>
+        <div style="background: rgba(255,255,255,0.1); padding: 44px; border-radius: 20px; border: 1.5px solid rgba(255,255,255,0.2);">
+            <div style="font-size: 40px; font-weight: 900; color: var(--accent); margin-bottom: 16px;">TRACK 2</div>
+            <h3 style="color:white; font-size: 26px; margin-bottom: 16px;">삼성카드 회원 멤버십 혜택</h3>
+            <p style="color: rgba(255,255,255,0.75); font-size: 16px; line-height: 1.8;">
+                기존 삼성카드로 고이 이용 시<br>
+                장례 비용 <strong style="color: var(--accent);">20만원 할인</strong> 제공<br>
+                전용카드 없이도 즉시 적용
+            </p>
+        </div>
+    </div>
+
+    <div style="margin-top: 48px; background: rgba(255,255,255,0.08); padding: 32px 40px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15);">
+        <p style="color: rgba(255,255,255,0.9); font-size: 17px; line-height: 1.8; text-align: center;">
+            두 트랙은 독립적으로도, 함께도 실행 가능합니다<br>
+            <strong style="color: white;">삼성카드가 적합하다고 판단하는 방향에서 시작합니다</strong>
+        </p>
+    </div>
+</div>
+
+<!-- ===== SLIDE 5: TRACK 1 - PLCC ===== -->
+<div class="slide">
+    <div class="logo-bar"><span class="brand">고이장례연구소</span><span class="sep">×</span><span class="brand">삼성카드</span></div>
+    <div class="slide-number">05</div>
+
+    <p class="section-label">TRACK 1</p>
+    <h2>고이 × 삼성카드 PLCC</h2>
+
+    <div class="flow">
+        <div class="flow-box">
+            <strong>고이 신규 가입</strong>
+            <span style="color: var(--text-muted); font-size: 13px;">연 10만명 목표</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box active">
+            <strong>고이 × 삼성카드<br>PLCC 발급</strong>
+            <span style="color: var(--samsung-blue); font-size: 13px; font-weight: 600;">가입비 할인 + 혜택</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">
+            <strong>매월 자동결제</strong>
+            <span style="color: var(--text-muted); font-size: 13px;">100원 ~ 9,900원</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box active">
+            <strong>장례 발생 시<br>대규모 결제</strong>
+            <span style="color: var(--samsung-blue); font-size: 13px; font-weight: 600;">평균 2,000만원</span>
+        </div>
+    </div>
+
+    <div class="grid-3 mt-md">
+        <div class="card">
+            <h4>💳 가입 혜택</h4>
+            <ul class="blist">
+                <li>고이 가입비 50% 할인</li>
+                <li>첫 1년 연회비 무료</li>
+                <li>정기결제 포인트 2배</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>🚨 장례 발생 시</h4>
+            <ul class="blist">
+                <li>긴급 한도 3,000만원 자동 증액</li>
+                <li>12개월 무이자 할부</li>
+                <li>5% 포인트 적립 (최대 100만원)</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>💸 조의금 혜택</h4>
+            <ul class="blist">
+                <li>삼성카드 간편송금 수수료 면제</li>
+                <li>타행이체도 무료</li>
+                <li>건수 제한 없음</li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="background: var(--bg); border-radius: 16px; padding: 36px 40px; margin-top: 8px;">
+        <h4 style="margin-bottom: 20px;">💰 장례 1건당 평균 결제 구조</h4>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>항목</th>
+                    <th>금액</th>
+                    <th>비고</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>장례식장 이용료</td><td>800만원</td><td style="color:var(--text-muted); font-size:14px;">3일장 기준</td></tr>
+                <tr><td>상조 대금</td><td>300~500만원</td><td style="color:var(--text-muted); font-size:14px;">선택 상품에 따라 상이</td></tr>
+                <tr><td>납골당 또는 수목장</td><td>700만원</td><td style="color:var(--text-muted); font-size:14px;">장지 유형에 따라 상이</td></tr>
+                <tr class="total"><td>합계</td><td style="color: var(--accent);">1,800~2,000만원</td><td></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ===== SLIDE 6: TRACK 1 - TAM ===== -->
+<div class="slide">
+    <div class="logo-bar"><span class="brand">고이장례연구소</span><span class="sep">×</span><span class="brand">삼성카드</span></div>
+    <div class="slide-number">06</div>
+
+    <p class="section-label">TRACK 1 — 접근 가능 거래액</p>
+    <h2>장례 현장 결제<br>TAM 분석</h2>
+
+    <div class="callout" style="margin-top: 0; margin-bottom: 36px;">
+        <p>아래는 <strong>삼성카드가 고이 플랫폼을 통해 접근 가능한 전체 거래액(TAM)</strong>입니다.<br>
+        실제 카드 전환율은 PLCC 혜택 설계에 따라 결정됩니다.</p>
+    </div>
+
+    <div class="stat-row" style="margin-bottom: 36px;">
+        <div class="stat-box">
+            <div class="num">800억</div>
+            <div class="lbl">2026년<br>4,000건 × 2,000만원</div>
+        </div>
+        <div class="stat-box">
+            <div class="num">1,200억</div>
+            <div class="lbl">2027년<br>6,000건 × 2,000만원</div>
+        </div>
+        <div class="stat-box">
+            <div class="num">1,600억</div>
+            <div class="lbl">2028년<br>8,000건 × 2,000만원</div>
+        </div>
+    </div>
+
+    <div class="table-wrap">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>2026</th>
+                    <th>2027</th>
+                    <th>2028</th>
+                    <th>3년 누적</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>장례 진행 건수</td>
+                    <td>4,000건</td>
+                    <td>6,000건</td>
+                    <td>8,000건</td>
+                    <td>18,000건</td>
+                </tr>
+                <tr>
+                    <td>건당 평균 거래액</td>
+                    <td>2,000만원</td>
+                    <td>2,000만원</td>
+                    <td>2,000만원</td>
+                    <td>—</td>
+                </tr>
+                <tr class="total">
+                    <td>장례 현장 거래액 TAM</td>
+                    <td>800억</td>
+                    <td>1,200억</td>
+                    <td>1,600억</td>
+                    <td style="color: var(--accent);">3,600억</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout" style="margin-top: 32px;">
+        <h4 style="margin-bottom: 8px;">💡 결혼카드와의 비교</h4>
+        <p>결혼카드: <strong>경쟁 PLCC 5개 이상, 레드오션, 1회성 거래</strong></p>
+        <p style="margin-top: 8px;">장례카드: <strong>장례 전용 카드 전무, 블루오션, 준비 기간 3년+ — 장기 LTV 우위</strong></p>
+    </div>
+</div>
+
+<!-- ===== SLIDE 7: TRACK 2 - MEMBERSHIP ===== -->
+<div class="slide">
+    <div class="logo-bar"><span class="brand">고이장례연구소</span><span class="sep">×</span><span class="brand">삼성카드</span></div>
+    <div class="slide-number">07</div>
+
+    <p class="section-label">TRACK 2</p>
+    <h2>삼성카드 회원<br>멤버십 혜택</h2>
+    <p style="color: var(--text-muted); font-size: 18px; margin-bottom: 0; margin-top: -20px;">기존 삼성카드로 고이 이용 시 즉시 적용 — 전용카드 발급 불필요</p>
+
+    <div class="benefit-hero">
+        <div class="amount">20만원</div>
+        <div class="desc">삼성카드 회원이 고이로 장례 진행 시 장례 비용 할인</div>
+    </div>
+
+    <div class="grid-3">
+        <div class="card">
+            <h4>🎯 삼성카드 입장</h4>
+            <ul class="blist">
+                <li>기존 회원에게 차별화 혜택 제공</li>
+                <li>장례 현장 결제 자연스럽게 유도</li>
+                <li>PLCC 없이 즉시 실행 가능</li>
+                <li>회원 충성도 강화</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>👤 고객 입장</h4>
+            <ul class="blist">
+                <li>새 카드 발급 없이 혜택 수령</li>
+                <li>급박한 상황에서 즉각적 절감</li>
+                <li>2,000만원 지출 중 20만원 절약</li>
+                <li>고이 선택의 명확한 이유 생김</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>📈 고이 입장</h4>
+            <ul class="blist">
+                <li>삼성카드 고객 베이스로 신규 가입 유입</li>
+                <li>장례 발생 시 삼성카드 고객 우선 연결</li>
+                <li>공동 마케팅 채널 확보</li>
+                <li>PLCC 전환 퍼널 역할</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="callout" style="margin-top: 8px;">
+        <h4 style="margin-bottom: 8px;">💡 TRACK 1과의 관계</h4>
+        <p>멤버십 혜택(TRACK 2)을 먼저 운영하며 수요를 확인한 후 PLCC(TRACK 1)로 고도화하는 단계적 접근도 가능합니다.</p>
+    </div>
+</div>
+
+<!-- ===== SLIDE 8: BENCHMARKING ===== -->
+<div class="slide">
+    <div class="logo-bar"><span class="brand">고이장례연구소</span><span class="sep">×</span><span class="brand">삼성카드</span></div>
+    <div class="slide-number">08</div>
+
+    <p class="section-label">벤치마킹</p>
+    <h2>결혼카드가 증명한<br>PLCC 성공 공식</h2>
+
+    <div class="table-wrap" style="margin-bottom: 36px;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>구분</th>
+                    <th style="text-align:center">결혼카드</th>
+                    <th style="text-align:center">장례카드 (고이 × 삼성카드)</th>
+                    <th style="text-align:center">비교</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>연간 발생 건수</td>
+                    <td style="text-align:center">20만건</td>
+                    <td style="text-align:center">35만건</td>
+                    <td style="text-align:center; color: #28a745; font-weight:700;">+75%</td>
+                </tr>
+                <tr>
+                    <td>평균 지출 금액</td>
+                    <td style="text-align:center">2억원</td>
+                    <td style="text-align:center">2,000만원</td>
+                    <td style="text-align:center; color: #dc3545;">낮음</td>
+                </tr>
+                <tr>
+                    <td>카드 결제 비율</td>
+                    <td style="text-align:center">30%+</td>
+                    <td style="text-align:center">50% → <strong>확대 목표</strong></td>
+                    <td style="text-align:center; color: #28a745; font-weight:700;">전환 여지 충분</td>
+                </tr>
+                <tr>
+                    <td>준비 기간</td>
+                    <td style="text-align:center">평균 6개월</td>
+                    <td style="text-align:center">평균 3년+</td>
+                    <td style="text-align:center; color: #28a745; font-weight:700;">+600%</td>
+                </tr>
+                <tr>
+                    <td>카드 보유 기간</td>
+                    <td style="text-align:center">1년 (일회성)</td>
+                    <td style="text-align:center">5년+ (지속)</td>
+                    <td style="text-align:center; color: #28a745; font-weight:700;">LTV 우위</td>
+                </tr>
+                <tr>
+                    <td>장례 전용 PLCC</td>
+                    <td style="text-align:center">해당없음</td>
+                    <td style="text-align:center; font-weight:700; color: var(--samsung-blue);">시장 최초</td>
+                    <td style="text-align:center; color: #28a745; font-weight:700;">First Mover</td>
+                </tr>
+                <tr class="total">
+                    <td>시장 성격</td>
+                    <td style="text-align:center">레드오션</td>
+                    <td style="text-align:center; color: var(--accent);">블루오션</td>
+                    <td style="text-align:center; color: var(--accent);">독점 가능</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout">
+        <h4 style="margin-bottom: 8px;">💡 핵심 차이</h4>
+        <p>결혼카드: <strong>거래액은 크지만 1회성, 경쟁 치열</strong></p>
+        <p style="margin-top: 8px;">장례카드: <strong>준비 기간이 존재하고 락인 효과 강함 — 장기적으로 더 높은 LTV, 시장 최초</strong></p>
+    </div>
+</div>
+
+<!-- ===== SLIDE 9: IMPLEMENTATION ===== -->
+<div class="slide">
+    <div class="logo-bar"><span class="brand">고이장례연구소</span><span class="sep">×</span><span class="brand">삼성카드</span></div>
+    <div class="slide-number">09</div>
+
+    <p class="section-label">실행 계획</p>
+    <h2>단계별 로드맵</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="tl-dot">1</div>
+            <h4>제휴 합의</h4>
+            <div class="period">2025년 6월</div>
+            <p>전략적 제휴 MOU<br>혜택 구조 확정<br>수수료 협의</p>
+        </div>
+        <div class="timeline-item">
+            <div class="tl-dot">2</div>
+            <h4>멤버십 런칭</h4>
+            <div class="period">2025년 8월</div>
+            <p>TRACK 2 선행 오픈<br>삼성카드 회원 20만원 혜택<br>시장 반응 확인</p>
+        </div>
+        <div class="timeline-item">
+            <div class="tl-dot">3</div>
+            <h4>PLCC 파일럿</h4>
+            <div class="period">2025년 10월</div>
+            <p>TRACK 1 수도권 시범<br>1만장 발급 목표<br>피드백 수집</p>
+        </div>
+        <div class="timeline-item">
+            <div class="tl-dot">4</div>
+            <h4>전국 확대</h4>
+            <div class="period">2026년 1월</div>
+            <p>전국 서비스 개시<br>연 5만장 발급<br>양사 공동 마케팅</p>
+        </div>
+    </div>
+
+    <div class="grid-2 mt-lg">
+        <div>
+            <h3>고이가 제공하는 것</h3>
+            <div class="grid-2" style="margin-top: 16px; margin-bottom: 0;">
+                <div class="card">
+                    <h4>📱 플랫폼 & 고객</h4>
+                    <ul class="blist">
+                        <li>10만+ 타겟 고객</li>
+                        <li>모바일 부고 서비스</li>
+                        <li>장례 현장 접점</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🔗 인프라</h4>
+                    <ul class="blist">
+                        <li>장례식장 1,000개소</li>
+                        <li>장지 1,000개소</li>
+                        <li>생애주기 데이터</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h3>삼성카드가 얻는 것</h3>
+            <div class="grid-2" style="margin-top: 16px; margin-bottom: 0;">
+                <div class="card">
+                    <h4>🎯 신규 시장</h4>
+                    <ul class="blist">
+                        <li>7조 미개척 시장</li>
+                        <li>장례 전용 카드 최초</li>
+                        <li>3년 TAM 3,600억</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>👥 고가치 고객</h4>
+                    <ul class="blist">
+                        <li>20~50대 전 연령층</li>
+                        <li>5년+ LTV</li>
+                        <li>가족카드 연계</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== SLIDE 10: CLOSING ===== -->
+<div class="slide">
+    <div class="hero-bg"></div>
+    <div class="logo-bar"><span class="brand">고이장례연구소</span><span class="sep">×</span><span class="brand">삼성카드</span></div>
+    <div class="slide-number">10</div>
+
+    <div class="hero-content" style="padding-top: 60px;">
+        <p class="section-label">마무리</p>
+        <h1>지금이<br><span class="blue">최적의 타이밍</span>입니다</h1>
+
+        <div class="grid-3" style="margin-top: 48px;">
+            <div class="card">
+                <h3>🚀 시장</h3>
+                <ul class="blist">
+                    <li>초고령 사회 진입 (2025)</li>
+                    <li>연 35만건, 7조원 규모</li>
+                    <li>장례 전용 카드 전무</li>
+                    <li>카드 전환 여지 충분</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>💪 파트너</h3>
+                <ul class="blist">
+                    <li>10만+ 구좌 달성</li>
+                    <li>누적 투자 119억 (Series A)</li>
+                    <li>장례식장·장지 각 1,000개소</li>
+                    <li>연 4,000건 장례 진행</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🎯 삼성카드 적합성</h3>
+                <ul class="blist">
+                    <li>40~50대 타겟 일치</li>
+                    <li>기존 인프라 즉시 활용</li>
+                    <li>단계적 실행 가능</li>
+                    <li>ESG 경영 부합</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="background: var(--samsung-blue); border-radius: 20px; padding: 48px; margin-top: 40px; color: white;">
+            <h3 style="color: white; text-align: center; margin-bottom: 32px; font-size: 20px;">핵심 제안 요약</h3>
+            <div class="grid-2" style="gap: 48px; margin-bottom: 0;">
+                <div>
+                    <div style="color: var(--accent); font-weight: 800; font-size: 16px; letter-spacing: 1px; margin-bottom: 16px;">TRACK 1. 고이 × 삼성카드 PLCC</div>
+                    <p style="color: rgba(255,255,255,0.85); line-height: 2;">
+                        장례 전용 삼성카드 (시장 최초)<br>
+                        장례당 평균 거래액 2,000만원<br>
+                        12개월 무이자 + 긴급한도 증액<br>
+                        <strong style="color: white;">3년 TAM 3,600억원</strong>
+                    </p>
+                </div>
+                <div>
+                    <div style="color: var(--accent); font-weight: 800; font-size: 16px; letter-spacing: 1px; margin-bottom: 16px;">TRACK 2. 삼성카드 회원 멤버십 혜택</div>
+                    <p style="color: rgba(255,255,255,0.85); line-height: 2;">
+                        기존 삼성카드로 즉시 적용<br>
+                        고이 장례 진행 시 <strong style="color: var(--accent);">20만원 할인</strong><br>
+                        PLCC 없이도 실행 가능<br>
+                        <strong style="color: white;">PLCC 전환 퍼널로 활용</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>고이장례연구소</strong> &nbsp;|&nbsp; strategy@goifuneral.co.kr &nbsp;|&nbsp; 1666-9784 &nbsp;|&nbsp; 서울특별시 관악구 신림로 122</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
